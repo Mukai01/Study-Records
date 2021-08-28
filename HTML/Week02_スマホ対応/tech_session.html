@@ -1,0 +1,52 @@
+<header>
+    <h1>headerタグ：サイトのヘッダーを表す</h1></header>
+
+<section class="information">
+    <h1>sectionタグ：領域を表す</h1>
+</section>
+
+<!-- 片方のCSSを設定することが可能 -->
+<!-- <style>h1 {text-align: center;}</style> -->
+<!-- <style>header h1 {text-align: center;}</style> -->
+
+<img src="img/jacket.png" alt="写真が表示されないときの文章">
+<p>文章を回りこませるには、floatを設定する</p>
+<style>img {float:left;}</style>
+
+<div class=description>
+    <p>回り込みを解除したい場合はclearを設定する</p></div>
+<style>.description p {clear:left;}</style>
+
+<div class="content">
+    <ol class="clearfix">
+        <li>箇条書きは</li>
+        <li>ol,liを使う</li>
+        <!-- target selfで今のウインドウで開く -->
+        <li><a href="https://youtu.be/vjqTkOISzeY" target="_self">
+        linkはa要素を使う</a></li>
+    </ol>
+</div>
+
+<!-- width50%, floatで2行が1行になる -->
+<style>li {width:50%; float:left;}</style>
+<!-- floatが最後だと、要素の高さが不確定なので0⇒色がつかない -->
+<!-- clearfixで最後に空白を追加することで解決可能 -->
+<style>.content {background-color:#E6E4;　}</style>
+<style>.clearfix:after {content:" "; display: table; clear:both;}</style>
+
+<footer>&copy; 著作権の帰属マーク</footer>
+
+<!-- cssアニメーションを設定する -->
+<div class="jacket">
+    <img src="img/jacket.png" alt="写真が表示されないときの文章">
+
+    <!-- 写真をクリックできる感を出すにはhoverという疑似クラスを設定。opacityは不透明度 -->
+    <!-- hoverはマウスhoverで、マウスが重なっているときを表す -->
+    <style>.jacket img:hover {opacity: .5; }</style> 
+
+    <!-- トランジションを設定するのは疑似クラスがない状態のセレクター -->
+    <!-- 不透明が変わったときにトランジションが発動、easeはなめらか -->
+    <style>.jacket img {transition-property: opacity;
+        transition-duration: 1s;
+        transition-timing-function: ease;
+        transition-delay: 0s}</style>

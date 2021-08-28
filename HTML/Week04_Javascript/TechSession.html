@@ -1,0 +1,28 @@
+<!-- JavaScriptはscript要素の中に書く -->
+<script>
+    document.write(10+3);
+    document.write('10+3');
+</script><br><br>
+
+<script>
+    document.write('20+3の結果は'+(20+3)+'です');
+    document.write('<br>'+(20+3));
+    document.write('<p class="date">20+3</p>');
+</script>
+
+<!-- 変数の定義 -->
+<script>
+    var answer = 30+3 ;
+    document.write('30+3の結果は'+answer+'です')
+</script><br><br>
+
+<!-- Dateオブジェクト -->
+<script>
+    // インスタンス化
+    var today = new Date() ;
+    // インスタンス化する際にパラメータをコンストラクターに渡すことも可能
+    // var today = new Date(2021,8,3) ;
+    document.write(today.getFullYear()+'<br>')
+    document.write(today.getMonth() +1 +'<br>') //0から始まるので+1が必要
+    document.write(today.getDate()+'<br>')
+</script>

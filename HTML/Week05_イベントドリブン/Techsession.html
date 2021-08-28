@@ -1,0 +1,149 @@
+<!-- CSSのフレームワークのBootStrapを使用する -->
+<head>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+</head>
+
+<!-- 基本形 -->
+<div>
+    <!--  btn-lg: 大きいボタン、btn-primary: 青 -->
+    <button id="start_stop" class="btn btn-lg btn-primary">START</button>
+    <script>
+        document.write('<p id="timer">00:00:00</p>');
+    </script>
+</div>
+
+<!-- DOMとは -->
+<div>
+    <button id="start_stop" class="btn btn-lg btn-primary">START</button>
+    <p id="timer2">00:00:00</p>
+    <script>
+        // DOM(Document Object Model) : HTMLの要素をプログラムの対象として扱う手段
+        // getElementById : パラメータにidを指定し、HTML内の要素を取得可能
+        // HTMLのtimer2要素を取得して書き換えることが可能
+        document.getElementById('timer2').innerHTML = '00:01:00' ;
+    </script>
+</div>
+
+<!-- if構文 -->
+<div>
+    <script>
+        var now = new Date();
+        var seconds = now.getSeconds();
+
+        // if文の書き方
+        // 10秒以下の時に0を追加
+        if (seconds < 10) {
+            seconds = '0' + seconds;
+        }
+        document.write(seconds)
+    </script>
+</div>
+
+<!-- 関数の書き方 -->
+<div>
+    <script>
+        // 10秒以下の時に0を追加する関数作成
+        var addition = function(a,b) {
+            return a + b;
+        };
+        document.write(addition(1,3));
+    </script>
+</div>
+
+<!-- ユーザーの操作に反応させる(イベント・ドリブン) -->
+<div>
+    <button id="start_stop3" class="btn btn-lg btn-primary">START</button>
+    <p id="timer3">00:00:00</p>
+    <script>
+        // addEventListenerの第一引数はイベントの種類、第二引数には関数を指定する
+        // ここでは無名関数を使っている
+        document.getElementById('start_stop3').addEventListener('click',function(){
+            // getTimeで秒数を取得可能
+            var start = new Date()
+            document.getElementById('timer3').innerHTML = start.getTime();
+        }) ;
+    </script>
+</div>
+
+<!-- 自動で何度もプログラムを実行する -->
+<div>
+    <button id="start_stop4" class="btn btn-lg btn-primary">START</button>
+    <p id="timer4">00:00:00</p>
+    <script>
+        document.getElementById('start_stop4').addEventListener('click',function(){
+            var start = new Date()
+            // setInterval で goTimer処理を10ミリ秒単位で繰り返す
+            setInterval(goTimer, 10);
+        }) ;
+
+        // goTimer処理を作成
+        // setIntervalの中の関数には引数を指定できない
+        // 引数を指定するには、setIntervalの中を無名関数にし、その中でほかの関数を呼び出す
+        var goTimer = function() {
+            var now = new Date();
+            
+            document.getElementById('timer4').innerHTML = now.getTime();
+        }
+    </script>
+</div>
+
+<!-- グローバル変数を定義 -->
+<div>
+    <button id="start_stop5" class="btn btn-lg btn-primary">START</button>
+    <p id="timer5">00:00:00</p>
+    <script>
+        // ここでstartを宣言することでグローバル変数になる
+        var start2;
+        document.getElementById('start_stop5').addEventListener('click',function(){
+            start2 = new Date();
+            setInterval(goTimer2, 10);
+        }) ;
+
+
+        var goTimer2 = function() {
+            var now2 = new Date();            
+            // グローバル変数にしたので、goTimerの中でもstartを使用可能
+            // これにより差分を計算可能
+            // Math.floorで切り捨て、1000で割ることで秒に直している
+            document.getElementById('timer5').innerHTML = Math.floor((now2.getTime()-start2.getTime())/1000);
+        }
+    </script>
+</div>
+
+<!-- STOPボタンを作成 -->
+<div>
+    <button id="start_stop6" class="btn btn-lg btn-primary">START</button>
+    <p id="timer6">00:00:00</p>
+    <script>
+        // グローバル変数で定義
+        var timer_id;
+
+        document.getElementById('start_stop6').addEventListener('click', function(){
+            // STARTボタンの時は、STOPへ変更する
+            if (this.innerHTML === 'START'){
+                // setIntervalを変数に格納
+                timer_id=setInterval(goTimer3, 10);
+
+                this.innerHTML = 'STOP';
+                this.classList.remove('btn-primary');
+                this.classList.add('btn-danger');
+            // それ以外の時は、STARTに変更する
+           } else {
+                // clearIntervalでsetIntervalを削除
+                clearInterval(timer_id);
+                this.innerHTML = 'START';
+                this.classList.remove('btn-danger');
+                this.classList.add('btn-primary');
+           }
+       });
+
+        var goTimer3 = function() {
+            var now = new Date();
+            document.getElementById('timer6').innerHTML = now.getTime();
+        }
+    </script>
+</div>

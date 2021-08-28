@@ -1,0 +1,113 @@
+<!-- CSSのフレームワークのBootStrapを使用する -->
+<head>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+</head>
+
+<!-- class=containerで左右に空白ができる(bootstrap) -->
+<div class="container">
+    <header><h1>ご利用アンケート</h1></header>
+</div>
+
+<!-- 1行を12カラムに分けて何個ずつ使用するかを指定できる -->
+<!-- smは768px以下だと6カラムになる。⇒RWDに対応可能 -->
+<div class="row">
+    <div class="col-sm-4">
+        <p>ご利用アンケート</p>
+    </div>
+    <div class="col-sm-8">
+        <a href="/">HOMEへ戻る</a>
+    </div>
+</div>
+
+<!-- formでフォームを作成する -->
+<!-- method=postはurlを変化させることなくフォームの内容を送信する方式 -->
+<!-- class=formcontrolで回答欄が下に移動して、幅が広くなる(bootstrap) -->
+<!-- requiredで必須回答となる -->
+<div class="container">
+    <form action ="https://book.h2o-space.com/html/form.php"  method="post">
+        <label for="name">お名前</label>
+        <!-- <input type="text" id="name" name="name"> -->
+        <input type="text" id="name" name="name" class="form-control" placeholder="例)山田太郎">
+    </form>
+</div>
+
+<!-- 本当はこの後もformの中に入れる必要あるが、練習なので出している -->
+<!-- selectとoptionでドロップダウンリストを作成 -->
+<div class="container">
+    <label for="job">ご職業</label>
+    <select id="job" name="job" class="form-control">
+        <option value="">選択してください</option>
+        <option value="会社員">会社員</option>
+        <option value="学生">学生</option>
+    </select>
+</div>
+
+<!-- チェックボックスを作成 -->
+<!-- label要素は入力ボックスの説明（クリックすると入力可能になる） -->
+<!-- Bootstrapでは、labelで囲んで、class=checkboxで囲む -->
+<div class="container">
+    <label>知りたい内容（複数選択可）</label>
+    <div class="checkbox">
+        <label>
+            <input type="checkbox" name="q1" value="html">
+            HTML
+        </label>
+    </div>
+    <div class="checkbox">
+        <label>
+            <input type="checkbox" name="q1" value="css">
+            CSS
+        </label>
+    </div>
+</div>
+
+<!-- ラジオボタンを設置する -->
+<!-- bootstrapではclass=radio-inlineで整う -->
+<!-- index.htmlではradio-inlineに対してメディアクエリでRWDとしている -->
+<div class="container">
+    <label>理解度はいかがですか？</label>
+    <div>
+        <label class="radio-inline">
+            <input type="radio" name="q2" id="q2_2" value="1">理解できなかった
+        </label>
+        <label class="radio-inline">
+            <input type="radio" name="q2" id="q2_2" value="2">あまり理解できなかった
+        </label>
+        <label class="radio-inline">
+            <input type="radio" name="q2" id="q2_2" value="3">少し理解できた
+        </label>
+        <label class="radio-inline">
+            <input type="radio" name="q2" id="q2_2" value="4">理解できた
+        </label>
+    </div>
+</div>
+
+<!-- textarea要素で入力欄を作成 -->
+<!-- rows：列 -->
+<div class="container">
+    <label for="message">ご意見</label>
+    <textarea name="message" id="message" rows="10" class="form-control"></textarea>
+</div>
+
+<!-- button要素で送信ボタンを作成 -->
+<!-- class属性にbootstrapで指定されているクラスを指定 -->
+<div class="container">
+    <button type="submit" class="btn btn-default">送信する</button>
+</div>
+
+<!-- requiredをつけることで必須回答になる -->
+<div class="container">
+    <form action ="https://book.h2o-space.com/html/form.php"  method="post">
+        <!-- label label-dangerで赤色になる(Bootstrap) -->
+        <label for="name">お名前</label><span class="label label-danger">必須</span>
+        <input type="text" id="name" name="name" class="form-control" placeholder="例)山田太郎" required>
+
+        <div class="container">
+            <button type="submit" class="btn btn-default">送信する</button>
+        </div>
+    </form>
+</div>

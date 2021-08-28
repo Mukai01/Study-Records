@@ -1,0 +1,34 @@
+<!-- これは決まり文句-->
+<!DOCTYPE html>
+<html>
+
+<!--表示されない情報をheadで指定する-->
+<head>
+    <!--文字コードの指定-->
+    <meta charset="UTF-8"> 
+    <!--デバイスの幅に応じて収縮する-->
+    <meta name="viewport" content="width=device-width"> 
+    <title>入会申し込み</title> 
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<!--ブラウザに表示する内容をbodyで示す-->
+<body>
+    <div class="content">
+        <h1>入会申し込み</h1>
+        <p>入会するには、次のフォームに必要事項をご記入ください。</p>
+        <div class="control">
+            <label for="mymail">メールアドレス<span class="required">必須</span></label>
+            <input id="mymail" type="email" name="mymail">
+        </div>
+        <div class="control">
+            <label for="passcode">パスワード<span class="required">必須</span></label>
+            <input id="passcode" type="password" name="passcode">
+        </div>
+        <div class="control">
+            <button type="submit">登録する</button>
+        </div>
+    </div>
+
+</body>
+</html>

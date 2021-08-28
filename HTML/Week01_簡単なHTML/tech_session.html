@@ -1,0 +1,39 @@
+<h1>h1-h6は見出し(heading)</h1>
+<h2>h2はh1より少し小さい</h2>
+
+<p>pはparagraph。前後の行に空白が生まれる</p>
+
+<!-- inputは閉じタグが無い（空要素） -->
+<p><input type="email" name="mymail" placeholder="例)toyota_akio.gmail.com"></p>
+<p><input type="password" name="passcode"></p>
+
+<!-- ボタンを作ることも可能 -->
+<p><button type="submit">登録する</button></p>
+
+<!-- CSSを記述 -->
+<h1 style="font-size: 24px; margin:50px">h1のスタイルを変更(文字の大きさ24, 上下左右のmargin50)</h1>
+
+<!-- 以下のようにCSSをまとめて定義することが可能 -->
+<!-- <style>h1 {font-size: 24px; margin:50px}</style> -->
+
+<!-- divは複数の要素をまとめる -->
+<div class="content">
+    <h1>入会申し込み</h1>
+    <p>こちらから申し込みください</p>
+</div>
+
+<!-- margin autoで中央に調整、borderで線を追加、marginは外との余白、paddingは要素の中の余白 -->
+<style>.content {background-color: #fcc; width:600px; margin:10px auto; border: 1px solid #0f0f0f; padding:30px}</style>
+
+<!-- bottunを押せそうに変更。border-radiusは四角の丸み、box-shadowが影、rgbaで透明を指定 -->
+<style>button {width:100%; background-color: #2096F3; color: #fff; padding:15px;
+     border-radius: 3px; box-shadow: 0 0 10px rgba(0,0,0,.4)}</style>
+
+<!-- このように書くことで、ラベルをクリックしても入力可能となる -->
+<label for="passcode">パスワード<span class="required">必須</span></label>
+<input id="passcode" type="password" name="passcode">
+<!-- labelはインライン要素なので改行したければ以下 -->
+<!-- <style>label {display:block}</style> -->
+<!-- spanはdivと異なり、inlineで区切る -->
+<!-- <style>.required {margin-left: .3em; color: #f33; font-size: .9em; padding: 3px;
+    background-color: #fee; font-weight: bold;}</style> -->
