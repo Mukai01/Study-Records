@@ -1,0 +1,13 @@
+#このファイルがBuild Contextにない場合
+#例えばsample_folderにいる場合は以下のように実行
+#docker build -f ../Dockerfile.dev .
+#docker images　でidを確認
+#docker run -it <ID>
+FROM ubuntu:16.04
+RUN touch test
+
+#lsを実行
+ENTRYPOINT ["ls"]
+#ENTRYPOINTのパラメータを渡す
+#docker run -it <ID> -la　とするとパラメータを上書き可能
+CMD ["--help"]
