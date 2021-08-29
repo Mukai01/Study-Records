@@ -1,0 +1,107 @@
+<header>
+    <h1>My Photos</h1>
+</header>
+
+<div id="img_unit">
+    <img src="img/img01.jpg">
+</div>
+
+<!-- position: fixed　でヘッダーを画面内固定 -->
+<!-- top:0 で一番上に配置 -->
+<!-- z-index:100で重なった時の優先度を100にする -->
+<style>header {position: fixed; top: 0; background-color: #007acc; width: 100%; z-index: 100}</style>
+
+<!-- JSONを使ってデータを記述する -->
+<script>
+    //JSONを使ってデータを記述する
+    // [ , , ] は配列と呼ばれる形式
+    var images = [
+        {"path": "img/img01.jpg",
+        "name": "sansaisan",
+        "caption":"こっちは貫禄ありすぎ"
+        },
+        {"path": "img/img02.jpg",
+        "name": "yukky_13dream",
+        "caption": "年明け富士山"
+        },
+        {"path": "img/img03.jpg",
+        "name": "maako",
+        "caption": "空と大地の境界線"
+        }
+    ];
+    
+    document.write(images[0].caption);
+
+    // 配列の操作
+    var pref = ['北海道','青森県','岩手県']
+    pref.push('宮城県'); //末尾に宮城県を追加
+    pref.pop(); //末尾の宮城県を削除
+    pref.shift(); //先頭の北海道を削除
+    pref.unshift('北海道'); //先頭に北海道を追加
+
+    pref.splice(1,2); //1番目のインデックス（青森）から2件削除
+    
+    document.write('<br>'+pref[0]);
+    document.write('<br>'+pref.length); //配列の長さを取得
+    document.write('<br>'+pref.indexOf('北海道')); //北海道が何個目かを取得
+
+    var prefCopy = pref.slice(); //配列をコピー
+    document.write('<br>'+prefCopy[0]);
+</script>
+
+<!-- JavascriptでHTMLを記述する -->
+<div id=img_unit2>
+</div>
+
+<script>
+    //document.createElementメソッドを利用して要素を作り出す
+    //<img src="img/img1.jpg"> を作り出す
+    var img;
+
+    //新しい要素を作成
+    img = document.createElement('img');
+    //src属性を追加
+    img.setAttribute('src',images[0].path);
+    //appendChildでimg_unit2の要素に追加し、表示
+    document.getElementById('img_unit2').appendChild(img);
+</script>
+
+<!-- JavascriptでHTMLを記述する+for構文で繰り返し処理 -->
+<div id=img_unit3>
+</div>
+
+<script>
+    // 以下を繰り返し作成する
+    // <div class="photo">
+    //     <img src="img/img01.jpg">
+    //     <div class="inner"><p>こっちは貫禄ありすぎ<span>sansaisan</span></p></div>
+    // </div>
+
+    //document.createElementメソッドを利用して要素を作り出す
+    var img;
+    var caption;
+    var div;
+
+    // for (初期化処理; 終了条件; 更新処理){繰り返し処理}
+    for (var i=0; i<images.length; i++) {
+        
+        img = document.createElement('img');
+        img.setAttribute('src',images[i].path);
+
+        // div class="inner" の部分を作る
+        caption = document.createElement('div');
+        caption.className = 'inner';
+        caption.innerHTML = '<p>' + images[i].caption + '<span>' + images[i].name + '</span></p>';
+
+        // div class="photo" の部分を作る
+        div = document.createElement('div')
+        div.className = 'photo'
+
+        //append_Childで追加していく
+        div.appendChild(img);
+        div.appendChild(caption);
+
+        //divをimg_unit2の要素に追加し、表示
+        document.getElementById('img_unit2').appendChild(div);
+    }
+</script>
