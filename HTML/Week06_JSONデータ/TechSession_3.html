@@ -1,0 +1,44 @@
+<!-- Ajax通信は面倒だが、こういうJavascriptの不便さを解消しようと誕生したライブラリがjQuery -->
+<!-- jQueryのページからjQueryをダウンロードし、jsフォルダに保管した -->
+
+
+<div class="container">
+    <div id="img_unit">
+    </div>
+</div>
+
+<!-- これでjQueryが使用可能 -->
+<script src="js/jquery-3.6.0.min.js"></script>
+
+<!-- まずはjQueryでHTMLの書き換えを行う -->
+<script>
+    // $ がjQueryであることを表す
+    // .htmlでhtmlを書き換えることが可能
+    $('#img_unit').html('ここに、画像リストが表示されます');
+    $('#img_unit').css('margin-top','100px');
+    
+    //このように.htmlの中が空だと取得という意味になる
+    document.write($('#img_unit').html())
+
+    // メソッドチェーンと言って、1行で書くことも可能
+    $('#img_unit').html('ここに、画像リストが表示されます').css('margin-top','100px');
+
+    // 新しい要素を作る(document.createElementに当たる)
+    $('<div class="photo"></div>')
+        // 要素を追加する
+        .append('<div class="inner"><p>テスト</p></div>')
+        // img_unitの要素に追加する
+        .appendTo("#img_unit")
+</script>
+
+<!-- jQueryでAjax通信を行う -->
+<div id="img_unit2">
+</div>
+
+<script>
+    // getJSONを使えばajax通信の部分もかなり簡単になる
+    // functionは処理が終わったら呼び出す処理
+    $.getJSON('https://h2o-space.com/htmlbook/images.php', function(data) {
+        $('#img_unit2').html(data[0].path);
+    })
+</script>

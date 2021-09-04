@@ -1,0 +1,29 @@
+<!-- JSONデータを外部ファイルにして、読み込む際にAjax通信を行う -->
+<!-- Ajax: JavaScriptを使った非同期通信（送信と受信を同時に行う方法） -->
+<!-- 非同期通信だと、送受信が完了する前に、次の処理に進む -->
+
+<script>
+    var ajax = new XMLHttpRequest();
+    // urlの中にはimages.jsonが格納されている
+    // セキュリティの観点からWebブラウザはローカルのファイルを読み取れないので、
+    // 今回はサーバー上のデータを使用する
+    ajax.open('GET','https://h2o-space.com/htmlbook/images.php');// 通信を開始
+    ajax.responseType = 'json'; // 受け取るデータを指定 
+    ajax.send(null); // パラメータの送信は不要なのでnull
+
+    // onreadystatechange はXMLHttpRequestの状況が変わるたびに呼び出される
+    // 非同期通信なので、sendメソッドの後、レスポンスを待たずに次に進む
+    ajax.onreadystatechange = function() {
+        // readyState が 完了になっているかどうか、かつ
+        // statusが200(正常終了）の場合に処理を続行
+        if(ajax.readyState === XMLHttpRequest.DONE && ajax.status === 200){
+            // thisは今操作しているインスタンス自身を表す（ここではajax)
+            // 受信した内容をresponseで取得する
+            var data = this.response;
+            document.write(data[0].path);
+        }
+    }
+</script>
+
+
+

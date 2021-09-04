@@ -1,0 +1,54 @@
+<!-- HTMLの生成部分が最終的にどうなるかわかりにくい -->
+<!-- フレームワークという考え方で、これを解決しようというアプローチの一つがVue.js -->
+
+<!-- このように通常通りに書いたHTMLを後から書き換えることが可能 -->
+<div id="vue_unit">
+    <!-- {{}} の中に対してVue.jsが働きかける -->
+    {{ message}}
+</div>
+
+<!-- これでVue.jsを使用可能 -->
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+<script>
+    var app = new Vue({
+        el: '#vue_unit',
+        data: {
+            message: 'Vue.jsで書き換えました'
+        }
+    });
+</script>
+
+
+<!-- 少し複雑な処理をVue.jsで実行してみる -->
+<div id="img_unit">
+    <!-- v-for で ループを作成できる -->
+    <div class="photo" v-for = "Photo in Photos">
+        <!--属性では{{}}は使わずに :属性名 = キー　とする  -->
+        <img :src="Photo.path">
+        <div class="inner"><p>{{Photo.caption}}</p></div>
+    </div>
+</div>
+
+<script src="js/jquery-3.6.0.min.js"></script>
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+
+<script>
+    var app = new Vue({
+        el: '#img_unit',
+        data: {
+            Photos: []
+        },
+        // createdのキーには、インスタンスが作成されたときに実行される処理を定義する
+        // インスタンスが作成されたときに以下の関数を実行する
+        created: function() {
+            // 下でthis.Photos = dataとしたいが、下ではthisがjQueryのオブジェクトを指してしまうので、
+            // ここで一回宣言しておく
+            var self = this;
+
+            $.getJSON('https://h2o-space.com/htmlbook/images.php', function(data) {
+            // 上で準備したPhotosにdataを格納
+            self.Photos = data;
+            });
+        }
+    });
+</script>
