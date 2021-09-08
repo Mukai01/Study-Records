@@ -23,3 +23,17 @@ Folder.GetFiles Folder: SelectedFolder FileFilter: $'''*.pdf''' IncludeSubfolder
 Display.InputDialog Title: $'''ファイル名有力''' Message: $'''結合後のファイル名を入力してください''' DefaultValue: $'''結合結果''' InputType: Display.InputType.SingleLine IsTopMost: False UserInput=> UserInput ButtonPressed=> ButtonPressed2
 Pdf.MergeFiles PDFFiles: Files MergedPDFPath: $'''%SelectedFolder%\\%UserInput%.pdf''' IfFileExists: Pdf.IfFileExists.AddSequentialSuffix PasswordDelimiter: $''',''' MergedPDF=> MergedPDF
 ```
+
+# 選択したフォルダ内のファイルを印刷する
+* メッセージボックス: フォルダーの選択ダイアログを表示
+* フォルダ: フォルダー内のファイルを取得
+* ループ: For each
+* システム: ドキュメントの印刷
+
+```
+Display.SelectFolder Description: $'''フォルダ選択''' InitialDirectory: $'''C:\\Users\\nakam\\study-records\\PowerAutomate\\data\\Section3 実践活用\\img+pdf''' IsTopMost: False SelectedFolder=> SelectedFolder ButtonPressed=> ButtonPressed
+Folder.GetFiles Folder: SelectedFolder FileFilter: $'''*''' IncludeSubfolders: False FailOnAccessDenied: True SortBy1: Folder.SortBy.NoSort SortDescending1: False SortBy2: Folder.SortBy.NoSort SortDescending2: False SortBy3: Folder.SortBy.NoSort SortDescending3: False Files=> Files
+LOOP FOREACH CurrentItem IN Files
+    DISABLE System.PrintDocument DocumentPath: CurrentItem
+    Display.ShowMessage Title: CurrentItem Message: CurrentItem Icon: Display.Icon.None Buttons: Display.Buttons.OK DefaultButton: Display.DefaultButton.Button1 IsTopMost: False ButtonPressed=> ButtonPressed2
+```
