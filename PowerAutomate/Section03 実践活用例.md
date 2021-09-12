@@ -37,3 +37,29 @@ LOOP FOREACH CurrentItem IN Files
     DISABLE System.PrintDocument DocumentPath: CurrentItem
     Display.ShowMessage Title: CurrentItem Message: CurrentItem Icon: Display.Icon.None Buttons: Display.Buttons.OK DefaultButton: Display.DefaultButton.Button1 IsTopMost: False ButtonPressed=> ButtonPressed2
 ```
+
+# エクセル情報をWebに入力
+* メッセージボックス: フォルダーの選択ダイアログを表示
+* Excel: Excelの起動
+* Excel: Excelワークシートから最初の空の列や行を取得
+* Excel: Excelワークシートから読み取り
+* ループ: For each
+    * CurrenItemにExcelDataを入れる
+    * CurrentItem[0]とするとテーブルの1つめを表す
+* 条件: If (CurrentItem[0]がからの時ループを抜ける)
+* ループ: ループを抜ける
+
+* ループの中でWebレコーダーの内容を入れる
+* Webオートメーション: ブラウザを閉じる
+
+
+# Webの捜査をWebレコーダー無しで実施
+* Webオートメーション: 新しいChromeを起動
+* Webオートメーション: Webフォーム入力: Webページ内のテキストフィールドに入力
+    * ctrl + clickで指定
+* Webオートメーション: Webデータ抽出: Webページ上の要素の詳細を取得します
+    * ctrl + clickで指定
+* テキスト: テキストを置換する
+    * 空白にする場合は%""%
+* テキスト: テキストを数値に変換
+* メッセージボックス: メッセージを表示
