@@ -33,3 +33,11 @@ SELECT 費目, SUM(出金額) AS 費目別の出金額合計
   FROM 家計簿
  GROUP BY 費目
 HAVING SUM(出金額) > 0
+
+-- Select文の全貌
+SELECT 選択列リスト
+  FROM テーブル名
+  -- WHERE 条件式
+  -- GROUP BY グループ化列名
+  -- HAVING 集計関数に対する条件式
+  -- ORDER BY 並び替え列名
