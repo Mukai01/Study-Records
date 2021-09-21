@@ -14,7 +14,6 @@ SELECT 費目 AS ITEM, 入金額 AS RECEIVE, 出金額 AS PAY
   FROM 家計簿 AS MONEYBOOK
  WHERE 費目 = '給料' -- 費目が給料のみを抽出
 
-
 -- 2. UPDATE文の書き方---------------------------------------------------------
 -- データを更新する
  UPDATE 家計簿
