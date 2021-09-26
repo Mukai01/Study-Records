@@ -13,3 +13,38 @@ SELECT 日付, 名前 AS 費目, メモ
 -- LEFT JOIN: 左外部結合
 -- RIGHT JOIN: 右外部結合
 -- FULL JOIN: 完全外部結合
+
+-- 4. 結合に関する構文----------------------------------------
+-- 左右のテーブルに同じ名前がある時は、.を使ってテーブルを指定する
+SELECT 日付, 家計簿.メモ, 費目.メモ
+  FROM 家計簿
+  JOIN 費目
+    ON 家計簿.費目ID = 費目.ID
+
+-- テーブル名が長いとき
+SELECT 日付, K.メモ, H.メモ
+  FROM 家計簿 AS K
+  JOIN 費目 AS H
+    ON K.費目ID = H.ID
+
+-- 3つ以上のテーブル
+SELECT 日付, 費目.名前, 経費区分.名称
+  FROM 家計簿
+  JOIN 費目
+    ON 家計簿.費目ID = 費目.ID
+  JOIN 経費区分
+    ON 費目.経費区分ID = 経費区分.ID
+
+-- 副問い合わせの結果と結合
+SELECT 日付, 費目.名前, 費目.経費区分ID
+  FROM 家計簿
+  JOIN ( SELECT * FROM 費目
+          WHERE 経費区分ID = 1
+        ) AS 費目
+    ON 家計簿.費目ID = 費目.ID
+
+-- 同じテーブル同士の結合
+   SELECT A.日付, A.メモ, A.関連日付, B.メモ
+     FROM 家計簿 AS A
+LEFT JOIN 家計簿 as B
+       ON A.関連日付 = B.日付
