@@ -11,8 +11,10 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
 from pathlib import Path
+import os
 
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
+# __file__ : は現在のファイル名を表す
+# Pathでその絶対パスを取得し、親の親を見に行っている　⇒ manage.pyが入っているディレクトリを表す
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
@@ -51,10 +53,12 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'helloworldproject.urls'
 
+# DIRSに場所を追加
+# manage.pyの階層と同じ場所にあるtemplatesというディレクトリを表している
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
