@@ -31,7 +31,8 @@ ALLOWED_HOSTS = []
 
 
 # Application definition
-
+# Helloworldappを追加し、アプリをプロジェクトに認識させる
+# デフォルトで書かれているアプリはユーザー情報を整理する上で使われるものもある
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -39,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'helloworldapp.apps.HelloworldappConfig',
 ]
 
 MIDDLEWARE = [
