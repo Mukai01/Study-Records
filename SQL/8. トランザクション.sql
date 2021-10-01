@@ -12,6 +12,11 @@ DELETE FROM 家計簿 WHERE 日付 <='2018-01-31'
 COMMIT;
 
 -- ロールバックはROLLBACK で明示的に発生させることも可能
+-- 3/20のデータを削除したけど、やっぱりなかったことにする
+BEGIN;
+DELETE FROM 家計簿 WHERE 日付 = '2018-03-20';
+ROLLBACK;
+
 -- データベースの多くは自動コミットモードとなっており、
 -- 1つのSQL文が実行されるたびに、自動的にコミットが実行される
 -- 自動コミットモードを解除する方法は環境によって違う
@@ -35,3 +40,42 @@ COMMIT;
 
 SET TRANSACTION ISOLATION LEVEL READ COMMITED -- ダーティリードを防げる
 SET TRANSACTION ISOLATION LEVEL SERIALIZABLE -- 3つ全て防げる
+
+-- 3. ロックの活用
+-- 排他ロック: 他からのロックを一切許可しない
+-- 共有ロック: 他からの共有ロックを許す
+
+-- 明示的な行ロック
+-- SELECT文: 共有ロックがかかる
+-- SELECT文 ~ FOR UPDATE: 排他ロックがかかり、他のトランザクションからは該当行のデータを書き換えれない
+-- SELECT文 ~ FOR UPDATE (NOWAIT): 待たずにエラーを返すオプション
+BEGIN;
+SELECT * FROM 家計簿
+ WHERE 日付 >= '2018-02-01'
+   FOR UPDATE; -- 2月以降のデータを明示的ロック
+-- 集計処理1
+SELECT ~;
+-- 集計処理2
+SELECT ~;
+-- 集計処理3
+SELECT ~;
+COMMIT; -- ロックが解除される
+
+-- 明示的な表ロック
+-- LOCK TABLE テーブル名 IN モード名 MODE (NOWAIT)
+-- EXCLUSIVE: 排他ロック
+-- SHARE: 共有ロック
+
+-- 処理中にほかの人によって家計簿テーブルの内容が変化しないようにしながら、各種統計を記録する
+BEGIN;
+LOCK TABLE 家計簿 IN EXCLUSIVE MODE;
+INSERT INTO 統計結果
+SELECT 'データ件数', COUNT(*) FROM 家計簿;
+INSERT INTO 統計結果
+SELECT '出金額平均', AVG(出金額) FROM 家計簿;
+COMMIT; -- ロックが解除される
+
+-- デッドロック: トランザクション処理が同時にたくさん起きて、トランザクションの処理が途中で永久に止まる
+-- XをロックしたトランザクションAが、次にYをロックしようとしている状況で
+-- Yをロックした別のトランザクションBが、次にXをロックしようとすると発生する
+-- 多くのデータベースでは、デッドロックを定期的に調べて、あれば片方を失敗させる
