@@ -41,7 +41,7 @@ ROLLBACK;
 SET TRANSACTION ISOLATION LEVEL READ COMMITED -- ダーティリードを防げる
 SET TRANSACTION ISOLATION LEVEL SERIALIZABLE -- 3つ全て防げる
 
--- 3. ロックの活用
+-- 3. ロックの活用---------------------------------------------------------------------------------
 -- 排他ロック: 他からのロックを一切許可しない
 -- 共有ロック: 他からの共有ロックを許す
 
