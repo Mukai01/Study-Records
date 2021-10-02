@@ -53,6 +53,8 @@ MIDDLEWARE = [
 ROOT_URLCONF = 'blogproject.urls'
 
 # DIRSにtemplatesを追加
+# osのインポートを追加
+import os
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',

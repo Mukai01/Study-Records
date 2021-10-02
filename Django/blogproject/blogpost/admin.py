@@ -1,3 +1,6 @@
 from django.contrib import admin
+# import 文を追加
+from .models import SampleModel
 
-# Register your models here.
+# Modelを登録する
+admin.site.register(SampleModel)
