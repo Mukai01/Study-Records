@@ -1,8 +1,4 @@
-# sudo: linuxでルート権限以外のユーザーがコメントを実行する際に使用
-# wget: httpを使ってインターネットからプログラムをとってくる
-# vim : Editor
 From ubuntu:16.04
-# apt-getを使う前にはupdateをしておかないと、古いファイルをとってきたりする
 RUN apt-get update && apt-get install -y\
     sudo \
     wget \
@@ -29,6 +25,6 @@ WORKDIR /
 
 # コマンドとオプションを指定
 # --ip : 0.0.0.0がローカルホストの意味⇒ローカルホストで動くようになる
-# --allow-root : ルートで動かすことを許可s
+# --allow-root : ルートで動かすことを許可
 # --LabApp.token : 自分のPCでセキュリティを考えなくてよいので、今回は無しで指定
 CMD ["jupyter","lab","--ip=0.0.0.0","--allow-root","--LabApp.token=''"]
