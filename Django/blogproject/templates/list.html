@@ -2,10 +2,17 @@
 {% extends 'base.html' %}
 
 {% block header %}
+<!-- headerを作成 -->
+<div class="jumbotron">
+  <h1 class="display-4">ブログ</h1>
+  <p class="lead">記事一覧です</p>
+</div>
 {% endblock header %}
 
 {% block content %}
     <div class="container">
+    <!-- 新規作成ボタンを追加 -->
+    <a href="{% url 'create' %}" class="btn btn-primary">新規作成</a>
     {% for item in object_list %}
     <div class="card">
         <h5 class="card-header">{{ item.category }}</h5>
@@ -14,7 +21,7 @@
           <h6 class="card-title">{{ item.postdate }}</h6>
           <!-- 以下へリンクを追加 -->
           <!-- url.pyのname = 'detail'と定義したurlを呼び出す -->
-          <a href="{% url 'detail' item.pkk %}" class="btn btn-primary">詳細へ</a>
+          <a href="{% url 'detail' item.pk %}" class="btn btn-primary">詳細へ</a>
         </div>
     </div>
     {% endfor %}

@@ -1,7 +1,7 @@
 from django.shortcuts import render
 
 # 以下のコードを追加
-from django.views.generic import ListView, DetailView, CreateView, UpdateView
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from .models import BlogModel
 # Createの遷移の設定のために必要
 from django.urls import reverse_lazy
@@ -29,4 +29,10 @@ class BlogUpdate(UpdateView):
     template_name = 'update.html'
     model = BlogModel
     fields = ('title', 'content', 'category')
+    success_url = reverse_lazy('list')
+
+# BlogDeleteを追加
+class BlogDelete(DeleteView):
+    template_name = 'delete.html'
+    model = BlogModel
     success_url = reverse_lazy('list')
