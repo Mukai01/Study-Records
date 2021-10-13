@@ -281,7 +281,7 @@ docker-compose --version　で docker-composeが入っていることを確認�
 
 【Docker Composeを使用する】
 前回までに学んだことを実行するならば以下のようなコードになる。
-docker run -v ~/Desktop/product-register:/product-register -p 3000:3000 -it <ID> bash
+docker run -v C:/Users/nakam/study-records/product-register:/product-register -p 3000:3000 -it <ID> bash
 
 これがDocker Composeを使うと楽になる
 Docker-compose.ymlを作成する
