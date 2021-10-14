@@ -3,6 +3,8 @@ from django.shortcuts import render
 from django.contrib.auth.models import User
 # エラー処理のためにimport 
 from django.db import IntegrityError
+# login画面の為にimport
+from django.contrib.auth import authenticate, login
 
 # renderの第1引数はrequest, 第2引数はtemplateとして使用する
 # 第3引数はhtmlの中で、{{ somedata }} とすると使うことが可能
@@ -34,3 +36,19 @@ def signupview(request):
         print(User.objects.all())
         return render(request, 'signup.html', {})
     return render(request, 'signup.html', {})
+
+def loginview(request):
+    if request.method == 'POST':
+        username_data = request.POST['username_date']
+        password_data = request.POST['password_data']
+        user = authenticate(request, username=username_data, password=password_data)
+        # userがテーブルにある時
+        if user is not None:
+            # loginしたユーザーの情報はsessionの中に保存される
+            login(request, user)
+            # ページ遷移はredirect
+            # renderはページの描画
+            return redirect('list')
+        else:
+            return redirect('login')
+    return render(request, 'login.html')
