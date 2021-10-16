@@ -114,3 +114,9 @@ STATIC_URL = '/static/'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# 画像の保存について設定
+# BASE_DIR (manage.pyの階層)の中のmediaフォルダを指し、画像が保管される
+# MEDIA_URLがURLになる
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/image/'

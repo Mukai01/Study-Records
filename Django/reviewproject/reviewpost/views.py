@@ -5,6 +5,8 @@ from django.contrib.auth.models import User
 from django.db import IntegrityError
 # login画面の為にimport
 from django.contrib.auth import authenticate, login
+# listviewのためにimport
+from .models import ReviewModel
 
 # renderの第1引数はrequest, 第2引数はtemplateとして使用する
 # 第3引数はhtmlの中で、{{ somedata }} とすると使うことが可能
@@ -52,3 +54,7 @@ def loginview(request):
         else:
             return redirect('login')
     return render(request, 'login.html')
+
+def listview(request):
+    object_list = ReviewModel.objects.all()
+    return render(request, 'list.html', {'object_list':object_list})
