@@ -58,3 +58,9 @@ def loginview(request):
 def listview(request):
     object_list = ReviewModel.objects.all()
     return render(request, 'list.html', {'object_list':object_list})
+
+# 引数にpkが必要
+def detailview(request, pk):
+    # pkが一致するもののみデータを抽出
+    object = ReviewModel.objects.get(pk=pk)
+    return render(request, 'detail.html', {'object':object})
