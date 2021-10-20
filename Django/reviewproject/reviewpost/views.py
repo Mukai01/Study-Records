@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 # usertableに保存するためにimport
 from django.contrib.auth.models import User
 # エラー処理のためにimport 
@@ -7,6 +7,11 @@ from django.db import IntegrityError
 from django.contrib.auth import authenticate, login
 # listviewのためにimport
 from .models import ReviewModel
+# Createviewのためにimport 
+from django.views.generic import CreateView
+from django.urls import reverse_lazy
+# ログイン確認機能追加
+from django.contrib.auth.decorators import login_required
 
 # renderの第1引数はrequest, 第2引数はtemplateとして使用する
 # 第3引数はhtmlの中で、{{ somedata }} とすると使うことが可能
@@ -41,7 +46,7 @@ def signupview(request):
 
 def loginview(request):
     if request.method == 'POST':
-        username_data = request.POST['username_date']
+        username_data = request.POST['username_data']
         password_data = request.POST['password_data']
         user = authenticate(request, username=username_data, password=password_data)
         # userがテーブルにある時
@@ -55,12 +60,21 @@ def loginview(request):
             return redirect('login')
     return render(request, 'login.html')
 
+@login_required
 def listview(request):
     object_list = ReviewModel.objects.all()
     return render(request, 'list.html', {'object_list':object_list})
 
 # 引数にpkが必要
+@login_required
 def detailview(request, pk):
     # pkが一致するもののみデータを抽出
     object = ReviewModel.objects.get(pk=pk)
     return render(request, 'detail.html', {'object':object})
+
+# Class-based viewで記述
+class CreateClass(CreateView):
+    template_name = 'create.html'
+    model = ReviewModel
+    fields = ('title', 'content', 'author', 'images', 'evaluation')
+    success_url = reverse_lazy('list')

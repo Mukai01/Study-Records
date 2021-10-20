@@ -125,3 +125,6 @@ MEDIA_URL = '/image/'
 STATIC_URL = '/staticfile/'
 # STATIC_ROOTは指定していないとSTATICFILES_DIRSが使われるのでこっちの指定で良い
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+
+# ログインしていない場合に遷移させるディレクトリを設定する
+LOGIN_URL = '/login/'
