@@ -3,8 +3,8 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 # エラー処理のためにimport 
 from django.db import IntegrityError
-# login画面の為にimport
-from django.contrib.auth import authenticate, login
+# login/logout画面の為にimport
+from django.contrib.auth import authenticate, login, logout
 # listviewのためにimport
 from .models import ReviewModel
 # Createviewのためにimport 
@@ -78,3 +78,26 @@ class CreateClass(CreateView):
     model = ReviewModel
     fields = ('title', 'content', 'author', 'images', 'evaluation')
     success_url = reverse_lazy('list')
+
+# logoutviewを作成
+def logoutview(request):
+    # ユーザーをログアウトさせる
+    logout(request)
+    # loginページにredirectする
+    return redirect('login')
+
+def evaluationview(request, pk):
+    # 参考になったボタンがクリックされた対象のデータ情報をpostに格納
+    post = ReviewModel.objects.get(pk=pk)
+    # ユーザー名＋IDを格納（ex: tanaka2)
+    author_name = request.user.get_username() + str(request.user.id)
+    # 参考になったユーザーがすでに登録されているかどうか確認
+    if author_name in post.useful_review_record:
+        return redirect('list')
+    # 登録されていなければ更新する
+    else:
+        post.useful_review = post.useful_review + 1
+        post.useful_review_record = post.useful_review_record + author_name
+        # データを上書き
+        post.save()
+        return redirect('list')

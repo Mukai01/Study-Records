@@ -18,8 +18,9 @@
             <h5 class="card-title">レビュー内容:{{ object.content }}人</h5>
             <h5 class="card-title">投稿者の評価:{{ object.evaluation }}人</h5>
             <h5 class="card-title">レビューが参考になった人:{{ object.useful_review}}人</h5>
-            <a href="#" class="btn btn-primary">参考になった</a>
-            <a href="#" class="btn btn-primary">戻る</a>
+            <!-- 参考になったボタンを作成する -->
+            <a href="{% url 'evaluation' object.pk %}" class="btn btn-primary" role="button" aria-pressed="true">参考になった</a>
+            <a href="{% url 'list' %}" class="btn btn-primary">戻る</a>
         </div>
     </div>
 </div>

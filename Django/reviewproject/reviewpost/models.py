@@ -12,5 +12,5 @@ class ReviewModel(models.Model):
     # 画像の保存先はsettings.pyで指定した場所でよければブランクでOK
     images = models.ImageField(upload_to='')
     useful_review = models.IntegerField(null=True, blank=True, default=0)
-    useful_revie_record = models.TextField()
+    useful_review_record = models.TextField()
     evaluation = models.CharField(max_length=10, choices=EVALUATION_CHOICES)
