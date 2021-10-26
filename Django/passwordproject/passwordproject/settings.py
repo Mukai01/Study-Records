@@ -128,3 +128,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Login後に管理画面に移動する
 LOGIN_REDIRECT_URL = 'admin:index'
+
+# Email送信のために追加する
+# consoleと記述することで、メールが送られるのではなくメッセージがターミナル上で表示される
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
