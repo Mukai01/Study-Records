@@ -131,4 +131,12 @@ LOGIN_REDIRECT_URL = 'admin:index'
 
 # Email送信のために追加する
 # consoleと記述することで、メールが送られるのではなくメッセージがターミナル上で表示される
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
+# メール送信の為追加
+DEFAULT_FROM_EMAIL = 'xxx@gmail.com'
+EMAIL_HOST = 'smtp.sendgrid.net'
+EMAIL_HOST_USER = 'apikey'
+EMAIL_HOST_PASSWORD = 'APIを張り付ける'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
