@@ -1,6 +1,7 @@
 import tkinter
 from tkinter import ttk
 from googletrans import Translator
+from tkinter import filedialog
 # pip install googletrans==4.0.0-rc1
 
 # 翻訳用のインスタンスを作成
@@ -40,6 +41,12 @@ def convert():
     # 表示
     output_box.insert('1.0', after_text.text)
 
+def save():
+    # inidialdir は初期の保存先、defaultextension はデフォルトの拡張子
+    file_name = filedialog.asksaveasfilename(title='名前を付けて保存', filetypes=[('Text','.txt'),('PNG','.png')], initialdir='./', defaultextension='.txt')
+    with open(file_name, 'w') as f:
+        f.write(output_box.get('1.0','end-1c'))
+
 # プルダウンの作成
 language_list = ['日本語', '英語', '中国語', 'フランス語', 'ドイツ語', 'ヒンディー語']
 
@@ -70,7 +77,7 @@ input_box.insert('1.0', '翻訳したい文章を入力') # Textの時は1行目
 
 # ボタンの作成
 convert_button = tkinter.Button(root, text='翻訳', font=bold_font, fg='white', bg=button_color, command=convert)
-save_button = tkinter.Button(root, text='保存', font=bold_font, fg='white', bg=button_color)
+save_button = tkinter.Button(root, text='保存', font=bold_font, fg='white', bg=button_color, command=save)
 
 convert_button.grid(row=2, column=0, columnspan=3, padx=10, pady=10, ipadx=50)
 save_button.grid(row=3, column=0, columnspan=3,padx=10, pady=(0,10), ipadx=50)
