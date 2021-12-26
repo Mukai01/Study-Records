@@ -1,0 +1,15 @@
+{% extends 'base.html' %} 
+
+{% block header %} 
+{% endblock header %} 
+
+{% block content %} 
+<!-- actionは次にどのurlに遷移するかを指定する -->
+<!-- methodは一般的にPOSTを使う -->
+<!-- Djangoではformの場合にワンタイムパスワードを持っていないと処理が行われない⇒ csrf-tokenが必要 -->
+<form action="" method="POST">{% csrf_token %}
+    <!-- modelで定義された項目をpタグで囲って表示させる -->
+    {{form.as_p}}
+    <input type = "submit" value="作成する">
+</form>
+{% endblock content %}
