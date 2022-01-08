@@ -140,9 +140,9 @@ class Renderer:
                         3: (0.4, 0.4),
                     }
                     if r == WALL:
-                        ax.add_patch(plt.Rectangle((tx, ty), 1, 1, fc="#666"))
+                        ax.add_patch(plt.Rectangle((tx, ty), 1, 1, fc="#666666"))
                     elif state in self.goal_state:
-                        ax.add_patch(plt.Rectangle((tx, ty), 1, 1, fc="#0f0"))
+                        ax.add_patch(plt.Rectangle((tx, ty), 1, 1, fc="#00ff00"))
                     else:
 
                         tq = q[(state, action)]
